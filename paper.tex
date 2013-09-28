@@ -1,0 +1,36 @@
+% Copyright 2013 Sean Kelleher. All rights reserved.
+% Use of this source code is governed by a GPL
+% license that can be found in the LICENSE file.
+
+\documentclass{report}
+
+\title{Investigation and Development of Self-Optimizing Data Structures}
+\author{Sean Kelleher}
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+
+Traditional implementations of common data structures are generally designed to
+be simple, being based on a single principle such as being organized in an array
+or a linked list, and an appropriate implementation is chosen by an estimate of
+the best fit for a problem domain. However, usage of a data structure can change
+over the course of execution of a single program, or certain properties of the
+data may change, causing the original implementation of the data structure to
+become inadequate for dealing with its task at large. For instance, a list which
+was originally being built up by a sequence of appending operations, taking
+advantage of a list-based structure, may be subjected to a rally of random
+accesses, which would achieve better performance if the list was instead being
+stored in an array. A matrix which was once dense and whose methods traversed
+the entire 2-dimensional array it was stored in may save large numbers of
+computations, upon becoming sparse, by shifting to a grid representation based
+on linked-lists. This project aims to research and develop a suite of what will
+be referred to as self-optimizing data structures, which will strive to organize
+their underlying representation so as to take advantage of known patterns of
+behaviour or emerging data properties.
+
+\end{abstract}
+
+\end{document}
