@@ -6,7 +6,7 @@
 OUTDIR=build
 
 .PHONY: all
-all: clean $(OUTDIR)/paper.pdf
+all: clean $(OUTDIR)/paper.pdf $(OUTDIR)/report.pdf
 
 # This recipe changes the working directory for the execution of the `pdflatex`
 # command so that the output, and all auxiliary files, will be saved to the
@@ -16,6 +16,8 @@ all: clean $(OUTDIR)/paper.pdf
 $(OUTDIR)/%.pdf: $(OUTDIR)/%.tex $(OUTDIR)/%_refs.bib $(OUTDIR)
 	$(eval TARGET=$(notdir $<))
 	cd $(OUTDIR) ; \
+		pdflatex $(TARGET) ; \
+		bibtex $(basename $(TARGET)) ; \
 		pdflatex $(TARGET) ; \
 		pdflatex $(TARGET)
 

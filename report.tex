@@ -1,0 +1,73 @@
+% Copyright 2013 Sean Kelleher. All rights reserved.
+% Use of this source code is governed by a GPL
+% license that can be found in the LICENSE file.
+
+\documentclass{report}
+
+\title{Final Year Project Report}
+\author{Sean Kelleher}
+
+\bibliographystyle{alpha}
+
+\begin{document}
+
+\maketitle
+
+\tableofcontents
+
+\chapter{Introduction}
+
+I came up with the idea of creating data structures which change their
+underlying representation when reading about using circularly linked lists for
+representing matrices in \cite{Knuth:97}. I liked the idea, as it made
+traversing entire matrices trivial when the matrix was sparse - the only problem
+I found with the implementation was that, to use it, you had to be sure that the
+matrix was going to be sparse for the duration of its existence. However, this
+type of insight into the use of a data structure can only be intuited, or at
+best derived from testing the run time of its application under various inputs.
+However, testing an application in this way can lack the comprehensiveness of
+using real data.
+
+Another issue with the linked-list-based matrix, is that one has to actually be
+aware of its existence; the performance of the linked-list-based matrix can be
+unparallelled in some situations, but if those situations are rare then the
+tendency will be to use an ad-hoc 2-dimensional array without looking into
+alternatives. I base this assumption on personal experience, and back it up with
+a short anecdote of a project of mine: I was recently working on an emulator in
+Python which would simulate a game system; I had programmed the CPU and used
+components from a similar project to stabilize my own and get an output
+indicative of the correctness of my code.
+
+I found the resulting simulation woefully slow. Running the emulator which I was
+using components from yielded a similar runtime. Timing profiles of the
+execution didn't reveal any obvious bottlenecks, and yet, the simulation ran
+slower than the real time of the actual hardware, which was manufactured over a
+decade ago. Javascript implementations of the same platform exist, and run as
+smoothly as a simulator written in C - Python surely couldn't be that much
+slower than Javascript?
+
+I asked on a public forum, and suggestions stated that the performance of the
+Javascript emulators could have come from its JIT-based implementation on
+several browsers, a feature which is omitted from the standard Python
+implementation. Sure enough, when I ran the code under PyPy, a Python
+implementation boasting the afore-mentioned JIT, the simulation ran as well as a
+native application.
+
+An analogy can be drawn between this story and that of a typical use case of a
+data structure which is unfit for its purpose - one has to \textit{know} that
+there's a solution, and this solution generally cannot be happened upon by
+chance. What would be ideal is, if we are using a data structure and it starts
+to under-perform in a certain area, that the data structure would have the
+self-awareness to realize this under-performance, and change its internal
+representation to maximize performance in its new context. \\
+
+Regardless of the above points, I believe the project has the ability to stand
+on its own merit, even if just to present a suite of repeatable tests for
+comparing the performance of different data structure representations. While
+finding thresholds where a trade of representation is optimal and conducting
+other such experiments, the facts and figures gleaned from these exercises
+should prove illuminating about the structures being investigated.
+
+\bibliography{report_refs}
+
+\end{document}
