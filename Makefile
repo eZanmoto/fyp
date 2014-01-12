@@ -27,7 +27,6 @@ $(OUTDIR)/%.pdf: $(OUTDIR)/%.tex $(OUTDIR)/%_refs.bib $(OUTDIR)
 .PHONY: check
 check: clean check-paper check-report
 
-# "`cat $< | aspell --lang=en_IE --mode=tex --home-dir=$(CURDIR) list`"
 check-%: %.tex
 	@MISSPELLS=`cat $< | aspell -l en_IE -t --home-dir=$(CURDIR) list | uniq` ; \
 	if [ "$$MISSPELLS" != "" ] ; then \
