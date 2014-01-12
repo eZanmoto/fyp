@@ -15,7 +15,7 @@ all: check $(OUTDIR)/paper.pdf $(OUTDIR)/report.pdf
 # implementation-independence.
 #
 # We run `pdflatex` twice to solve cross-referencing issues, such as a label
-# occurring after a reference to it.
+# being defined after a reference to it.
 $(OUTDIR)/%.pdf: $(OUTDIR)/%.tex $(OUTDIR)/%_refs.bib $(OUTDIR)
 	$(eval TARGET=$(notdir $<))
 	cd $(OUTDIR) ; \
