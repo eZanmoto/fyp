@@ -4,13 +4,13 @@
 
 # Directories
 BINDIR=bin
-OUTDIR=build
+TGTDIR=build
 
 .PHONY: all
-all: check $(OUTDIR)/paper.pdf $(OUTDIR)/report.pdf
+all: check $(TGTDIR)/paper.pdf $(TGTDIR)/report.pdf
 #
-$(OUTDIR)/%.pdf: $(OUTDIR)/%.tex $(OUTDIR)
-	$(BINDIR)/buildtex.sh $(basename $(notdir $<)) $(OUTDIR)
+$(TGTDIR)/%.pdf: $(TGTDIR)/%.tex $(TGTDIR)
+	$(BINDIR)/buildtex.sh $(basename $(notdir $<)) $(TGTDIR)
 
 .PHONY: check
 check: clean check-paper check-report
@@ -19,12 +19,12 @@ check-%: %.tex
 	$(BINDIR)/spellcheck.sh $<
 
 # "Copy" local files to the build directory if they're required there.
-$(OUTDIR)/%: % $(OUTDIR)
-	ln -s ../$< $(OUTDIR)
+$(TGTDIR)/%: % $(TGTDIR)
+	ln -s ../$< $(TGTDIR)
 
-$(OUTDIR):
-	mkdir $(OUTDIR)
+$(TGTDIR):
+	mkdir $(TGTDIR)
 
 .PHONY: clean
 clean:
-	rm -rf $(OUTDIR)
+	rm -rf $(TGTDIR)
