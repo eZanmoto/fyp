@@ -1,0 +1,49 @@
+% Copyright 2013 Sean Kelleher. All rights reserved.
+% Use of this source code is governed by a GPL
+% license that can be found in the LICENSE file.
+
+\documentclass{report}
+
+\title{Final Year Project Report}
+\author{Sean Kelleher}
+
+\bibliographystyle{alpha}
+
+\begin{document}
+
+\maketitle
+
+\tableofcontents
+
+\chapter{Introduction}
+
+The motivation for the research of this material came to me when reading about
+using circularly linked lists for representing matrices in \cite{Knuth:97}. I
+liked the idea, as it made traversing entire matrices trivial when the matrix
+was sparse - the only problem I found with the implementation was that, to use
+it, you had to be sure that the matrix was going to be sparse for the duration
+of its existence. However, this type of insight into the use of a data structure
+can only be intuited, or at best derived from testing the run time of its
+application under various inputs.  However, testing an application in this way
+can lack the comprehensiveness of using real data.
+
+Regardless of the above points, I believe the project has the ability to stand
+on its own merit, even if just to present a suite of repeatable tests for
+comparing the performance of different data structure representations. While
+finding thresholds where a trade of representation is optimal and conducting
+other such experiments, the facts and figures gleaned from these exercises
+should prove illuminating about the structures being investigated.
+
+\chapter{Approach}
+
+\section{Analysis of data structure implementations}
+
+1. Find the maximum "comfortable" size of each implementation.
+
+We consider a "comfortable" size for a data structure implementation to be a
+data structure size which takes less than a certain predefined amount of time to
+construct.
+
+\bibliography{report}
+
+\end{document}
