@@ -60,7 +60,7 @@ $(TGTDIR):
 .PHONY: build-doc
 build-doc: | $(TGTDOC)/html
 
-$(TGTDOC)/html: $(SRCDIR) | $(TGTDOC)
+$(TGTDOC)/html: $(SRCDIR) $(INCDIRS) Doxyfile | $(TGTDOC)
 	doxygen > $(TGTDOC)/doxygen.log
 
 $(TGTDOC): | $(TGTDIR)
