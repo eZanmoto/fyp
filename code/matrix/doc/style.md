@@ -6,7 +6,7 @@ Sean Kelleher
 
 ### About
 
-Style guide for C code.
+Style guide for C projects.
 
 ### Header Files
 
@@ -41,3 +41,11 @@ using Javadoc-style comment syntax.
 
 C files are documented using single-line comments and must begin with a brief
 comment describing why the file exists.
+
+### Makefiles
+
+Makefile variables are created using the "expand" directive, `:=`, which
+disallows forward declarations in the interest of stability, since it is assumed
+in these makefiles that variables only need to be defined once. In particular,
+this improves stability by requiring that the `wildcard` function is evaluated
+only once - when the variable is defined.
