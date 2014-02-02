@@ -39,7 +39,7 @@ CINCS:=$(addprefix -I,$(INCDIRS))
 .PHONY: all
 all: build-all
 
-.PHONY: all
+.PHONY: rebuild
 rebuild: clean build-all
 
 .PHONY: build-all
