@@ -21,17 +21,37 @@
 
 /**
  * \brief Populate the variable `name`.
+ *
+ * An example of allocating the structure a variable points to:
+\code
+	struct pair {
+		int fst;
+		int snd;
+	};
+
+	struct node* p;
+	NEW(p);
+	p->fst = 24;
+	p->snd = 42;
+\endcode
+ *
+ * An example of allocating an array.
+\code
+	int* xs;
+	NEW(xs, 10);
+
+	int i;
+	for (i = 0; i < 10; i++) {
+		xs[i] = i;
+	}
+\endcode
  */
 #define NEW(...) _NEW(__VA_ARGS__, NEW2, NEW1)(__VA_ARGS__)
 
-/**
- * \brief Populate the variable `name`.
- */
+// Populate the variable `name`.
 #define NEW1(name) NEW2(name, 1)
 
-/**
- * \brief Populate the variable `name` as an array of size `n`.
- */
+// Populate the variable `name` as an array of size `n`.
 #define NEW2(name, n) \
 	name = malloc((n) * sizeof *(name)); \
 	if (!name) { \
