@@ -46,13 +46,13 @@
 	}
 \endcode
  */
-#define NEW(...) _NEW(__VA_ARGS__, NEW2, NEW1)(__VA_ARGS__)
+#define NEW(...) _NEW(__VA_ARGS__, NEW_ARRAY, NEW_STRUCT)(__VA_ARGS__)
 
 // Populate the variable `name`.
-#define NEW1(name) NEW2(name, 1)
+#define NEW_STRUCT(name) NEW_ARRAY(name, 1)
 
 // Populate the variable `name` as an array of size `n`.
-#define NEW2(name, n) \
+#define NEW_ARRAY(name, n) \
 	name = malloc((n) * sizeof *(name)); \
 	if (!name) { \
 		FATAL(1, "could not allocate memory"); \
