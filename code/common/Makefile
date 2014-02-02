@@ -17,7 +17,10 @@ endif
 
 # Directories
 SRCDIR:=src
+
 TGTDIR:=build
+
+TGTDOC:=$(TGTDIR)/doc
 
 INCDIRS:=include
 
@@ -55,8 +58,13 @@ $(TGTDIR):
 	mkdir $@
 
 .PHONY: build-doc
-build-doc:
-	doxygen
+build-doc: | $(TGTDOC)/html
+
+$(TGTDOC)/html: $(SRCDIR) | $(TGTDOC)
+	doxygen > $(TGTDOC)/doxygen.log
+
+$(TGTDOC): | $(TGTDIR)
+	mkdir $@
 
 .PHONY: clean
 clean:
