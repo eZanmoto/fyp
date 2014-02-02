@@ -48,7 +48,7 @@ build-lib: $(TGTDIR)/$(TARGET)
 $(TGTDIR)/$(TARGET): $(OBJECTS)
 	$(CC) $(CFLAGS) -shared -Wl,$(SONAME),$(TARGET) $^ -o $@
 
-$(TGTDIR)/%.o: $(SRCDIR)/%.c $(INCLUDES) $(TGTDIR)
+$(TGTDIR)/%.o: $(SRCDIR)/%.c $(INCLUDES) | $(TGTDIR)
 	$(CC) $(CFLAGS) $(CINCS) -fPIC -c $< -o $@
 
 $(TGTDIR):
