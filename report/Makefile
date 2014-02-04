@@ -6,8 +6,8 @@
 BINDIR:=bin
 TGTDIR:=build
 
-.PHONY: all
-all: check $(TGTDIR)/paper.pdf $(TGTDIR)/report.pdf
+.PHONY: build-all
+build-all: check $(TGTDIR)/paper.pdf $(TGTDIR)/report.pdf
 
 $(TGTDIR)/%.pdf: $(TGTDIR)/%.tex $(TGTDIR)
 	$(BINDIR)/buildtex.sh $(basename $(notdir $<)) $(TGTDIR)
