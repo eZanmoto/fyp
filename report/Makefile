@@ -26,7 +26,7 @@ $(TGTDIR)/%.pdf: $(TGTDIR)/%.tex
 	$(BINDIR)/buildtex.sh $(basename $(notdir $<)) $(TGTDIR)
 
 # "Copy" local files to the build directory if they're required there.
-$(TGTDIR)/%: % $(TGTDIR)
+$(TGTDIR)/%: % | $(TGTDIR)
 	ln -s ../$< $(TGTDIR)
 
 $(TGTDIR):
