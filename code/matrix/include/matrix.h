@@ -43,6 +43,11 @@ void matrix_set(matrix* m, int row, int col, int val);
  */
 int matrix_get(matrix* m, int row, int col);
 
+/** 
+ * \brief Multiply `m` by the scalar `x`.
+ */
+void matrix_smul(matrix* m, int x);
+
 /**
  * \brief Free the memory allocated to `m`.
  */

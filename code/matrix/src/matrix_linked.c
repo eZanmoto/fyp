@@ -7,7 +7,8 @@
 
 #include "matrix.h"
 
-// `matrix_cell`
+#include "err.h"
+
 typedef struct matrix_cell {
 	int value;
 	struct matrix_cell* up;
@@ -16,7 +17,6 @@ typedef struct matrix_cell {
 	int col;
 } matrix_cell;
 
-// 2D array-based matrix
 struct _matrix {
 	matrix_cell** rows;
 	matrix_cell** cols;
@@ -80,17 +80,19 @@ void matrix_free(matrix* m) {
 	for (i = 0; i < m->num_cols; i++) {
 		free(m->cols[i]);
 	}
+	free(m);
 }
 
 void matrix_set(matrix *m, int row, int col, int val) {
-	if (row >= m->num_rows || col >= m->num_cols) {
-		perror("cell out of range");
-		exit(1);
+	if (row >= matrix_num_rows(m) || col >= matrix_num_cols(m)) {
+		FATAL(1, "cell [%d, %d] out of range ([%d, %d])",
+			row, col, matrix_num_rows(m), matrix_num_cols(m));
 	}
 
 	matrix_cell* before = m->rows[row];
 
-	// will exit when we hit start, as m->rows[row]->col == -1, and !(-1 > col)
+	// will exit when we hit start because `m->rows[row]->col` = -1 and
+	// `col` is non-negative.
 	while (before->left->col > col) {
 		before = before->left;
 	}
@@ -109,9 +111,21 @@ void matrix_set(matrix *m, int row, int col, int val) {
 	}
 }
 
+void matrix_smul(matrix* m, int x) {
+	int row;
+	for (row = 0; row < matrix_num_rows(m); row++) {
+		matrix_cell* cur = m->rows[row]->left;
+		while (cur->col > -1) {
+			cur->value *= x;
+			cur = cur->left;
+		}
+	}
+}
+
 int matrix_get(matrix* m, int row, int col) {
 	matrix_cell* c = m->rows[row]->left;
-	// will exit when we hit start, as m->rows[row]->col == -1, and !(-1 > col)
+	// will exit when we hit start because `m->rows[row]->col` = -1 and
+	// `col` is non-negative.
 	while (col < c->col) {
 		c = c->left;
 	}
