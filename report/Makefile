@@ -22,7 +22,7 @@ rebuild: clean build-all
 .PHONY: build-all
 build-all: check $(patsubst %,$(TGTDIR)/%.pdf,$(SOURCES))
 
-$(TGTDIR)/%.pdf: $(TGTDIR)/%.tex $(TGTDIR)
+$(TGTDIR)/%.pdf: $(TGTDIR)/%.tex
 	$(BINDIR)/buildtex.sh $(basename $(notdir $<)) $(TGTDIR)
 
 # "Copy" local files to the build directory if they're required there.
