@@ -13,11 +13,14 @@
 BINDIR:=bin
 TGTDIR:=build
 
+# Files
+SOURCES:=$(patsubst %.tex,%,$(wildcard *.tex))
+
 .PHONY: rebuild
 rebuild: clean build-all
 
 .PHONY: build-all
-build-all: check $(TGTDIR)/paper.pdf $(TGTDIR)/report.pdf
+build-all: check $(patsubst %,$(TGTDIR)/%.pdf,$(SOURCES))
 
 $(TGTDIR)/%.pdf: $(TGTDIR)/%.tex $(TGTDIR)
 	$(BINDIR)/buildtex.sh $(basename $(notdir $<)) $(TGTDIR)
@@ -30,7 +33,7 @@ $(TGTDIR):
 	mkdir $(TGTDIR)
 
 .PHONY: check
-check: clean check-paper check-report
+check: clean $(addprefix check-,$(SOURCES))
 
 check-%: %.tex
 	$(BINDIR)/spellcheck.sh $<
