@@ -4,6 +4,7 @@
 #
 # Targets
 #
+# rebuild:      Make a clean build
 # build-all:    Build all deliverables
 # check:        Run tests
 # clean:        Removes the local build files
@@ -11,6 +12,9 @@
 # Directories
 BINDIR:=bin
 TGTDIR:=build
+
+.PHONY: rebuild
+rebuild: clean build-all
 
 .PHONY: build-all
 build-all: check $(TGTDIR)/paper.pdf $(TGTDIR)/report.pdf
