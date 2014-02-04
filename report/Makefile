@@ -1,6 +1,12 @@
 # Copyright 2013 Sean Kelleher. All rights reserved.
 # Use of this source code is governed by a GPL
 # license that can be found in the LICENSE file.
+#
+# Targets
+#
+# build-all:    Build all deliverables
+# check:        Run tests
+# clean:        Removes the local build files
 
 # Directories
 BINDIR:=bin
