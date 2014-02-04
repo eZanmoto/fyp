@@ -3,8 +3,8 @@
 # license that can be found in the LICENSE file.
 
 # Directories
-BINDIR=bin
-TGTDIR=build
+BINDIR:=bin
+TGTDIR:=build
 
 .PHONY: all
 all: check $(TGTDIR)/paper.pdf $(TGTDIR)/report.pdf
