@@ -1,2 +1,5 @@
-# Build directory.
+# Build directories.
 build/
+
+# Python build files.
+*.pyc
