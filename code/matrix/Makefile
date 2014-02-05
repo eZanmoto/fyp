@@ -13,7 +13,6 @@
 COMMON:=../common
 
 # Directories
-BINDIR:=bin
 EGSDIR:=examples
 SRCDIR:=src
 
@@ -42,10 +41,6 @@ IMPLS:=$(patsubst $(SRCDIR)/matrix_%.c,%,$(wildcard $(SRCDIR)/matrix_*.c))
 ifeq ($(wildcard $(SRCDIR)/matrix_$(IMPL).c),)
 $(error '$(IMPL)' is not a known matrix implementation ($(IMPLS)))
 endif
-
-# Commands
-TIME:=$(BINDIR)/do_time2.py
-PLOT:=$(BINDIR)/plot.py
 
 # Compiler options
 ifndef CC
