@@ -87,15 +87,23 @@ fig = plt.figure()
 fig.suptitle("Timing of {0}, ".format(args['func']) +
     make_fmt((f.upper(), args[f][0]) for f in fields if len(args[f]) == 1),
     fontweight='bold')
-fig.text(0.03, 0.5, 'Time (ms)', ha='center', va='center', rotation='vertical')
+fig.text(0.03, 0.5, 'Time (s)', ha='center', va='center', rotation='vertical')
 fig.text(0.5, 0.06, 'Density (%)', ha='center', va='center')
-cs = list(comb.combs([args[f] for f in fields]))
+
+# FIXME `css` is a list of `(f, v)` pairs, where `f` is a field name and `v` is
+# the possible values for the field. The list is sorted in descending order on
+# the size of `v`, which makes some graphs look nicer (graphs where the number
+# of columns is equal to the size of the largest `v`). This is a very hacky
+# implementation and should be replaced as soon as it is feasible.
+css = sorted([(f, args[f]) for f in fields], key=lambda p: len(p[1]), reverse=True)
+
+cs = list(comb.combs(map(lambda x: x[1], css)))
 y = int(math.ceil(math.sqrt(len(cs)+1)))
 x = int(math.ceil((len(cs)+1) / float(y)))
 ax = None
 for i in xrange(len(cs)):
     ax = fig.add_subplot(x, y, 1+i, sharex=ax, sharey=ax)
-    c = dict(zip(fields, map(str, cs[i])))
+    c = dict(zip(map(lambda f: f[0], css), map(str, cs[i])))
     fname = ("build/dat/time_" + args['func'] +
              "_%s_" + '_'.join(c[f] for f in fields) + '_'
              + str(args['num_points']) + '.txt')
