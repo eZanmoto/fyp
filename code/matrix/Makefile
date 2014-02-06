@@ -32,11 +32,10 @@ TARGETS:=$(patsubst $(SRCDIR)/%.c,%,$(wildcard $(SRCDIR)/time_*.c))
 INCLUDES:=$(foreach INCDIR,$(INCDIRS),$(wildcard $(INCDIR)/*))
 EXAMPLES:=$(patsubst $(EGSDIR)/%.c,%,$(wildcard $(EGSDIR)/*))
 
-ifndef IMPL
-IMPL:=1darray
-endif
-
 IMPLS:=$(patsubst $(SRCDIR)/matrix_%.c,%,$(wildcard $(SRCDIR)/matrix_*.c))
+ifndef IMPL
+IMPL:=$(word 1,$(IMPLS))
+endif
 ifeq ($(wildcard $(SRCDIR)/matrix_$(IMPL).c),)
 $(error '$(IMPL)' is not a known matrix implementation ($(IMPLS)))
 endif
