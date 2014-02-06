@@ -29,7 +29,6 @@ LIBDIRS:=$(COMMON)/build
 
 # Files
 TARGETS:=$(patsubst $(SRCDIR)/%.c,%,$(wildcard $(SRCDIR)/time_*.c))
-OBJECTS:=$(patsubst $(SRCDIR)/%.c,$(TGTDIR)/%.o,$(wildcard $(SRCDIR)/*))
 INCLUDES:=$(foreach INCDIR,$(INCDIRS),$(wildcard $(INCDIR)/*))
 EXAMPLES:=$(patsubst $(EGSDIR)/%.c,%,$(wildcard $(EGSDIR)/*))
 
