@@ -62,6 +62,13 @@ ifndef NUM_POINTS
 NUM_POINTS:=1000
 endif
 
+# Variables for platform independence
+ifeq ($(shell uname -s),Darwin)
+LIB_PATH:=DYLD_LIBRARY_PATH
+else
+LIB_PATH:=LD_LIBRARY_PATH
+endif
+
 .PHONY: all
 all: build-all
 
@@ -77,7 +84,7 @@ build-dat: $(patsubst %,$(TGTDAT)/%_$(SIG)_$(SIZE)_$(NUM_POINTS).txt,$(TARGETS))
 # This recipe writes to a temporary file first so that the file generated from
 # an erroneous execution won't be regarded as a built target.
 $(TGTDAT)/%_$(SIZE)_$(NUM_POINTS).txt: $(TGTBIN)/% $(TGTBIN)/libcommon.so | $(TGTDAT)
-	cd $(TGTBIN) && ./$(notdir $<) $(SIZE) $(NUM_POINTS) > ../../$@~
+	$(LIB_PATH)=$(TGTBIN):$$$(LIB_PATH) $< $(SIZE) $(NUM_POINTS) > $@~
 	mv $@~ $@
 
 $(TGTBIN)/libcommon.so $(TGTEGS)/libcommon.so: $(COMMON)/build/libcommon.so
