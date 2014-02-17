@@ -87,7 +87,7 @@ fig = plt.figure()
 fig.suptitle("Timing of {0}, ".format(args['func']) +
     make_fmt((f.upper(), args[f][0]) for f in fields if len(args[f]) == 1),
     fontweight='bold')
-fig.text(0.03, 0.5, 'Time (s)', ha='center', va='center', rotation='vertical')
+fig.text(0.03, 0.5, 'Time (ns)', ha='center', va='center', rotation='vertical')
 fig.text(0.5, 0.06, 'Density (%)', ha='center', va='center')
 
 # FIXME `css` is a list of `(f, v)` pairs, where `f` is a field name and `v` is

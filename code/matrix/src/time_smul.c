@@ -5,11 +5,12 @@
 #include <stdbool.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include <time.h>
+// #include <time.h>
 
 #include "err.h"
 #include "lcg.h"
 #include "new.h"
+#include "timer.h"
 
 #include "matrix.h"
 
@@ -37,6 +38,7 @@ int main(int argc, char** argv) {
 
 	int print_interval = num_cells / n;
 	int i;
+	timer* t = timer_new();
 	for (i = 0; i < num_cells; i++) {
 		unsigned int next = lcg_next(lcg);
 		int row =  next / size;
@@ -49,9 +51,9 @@ int main(int argc, char** argv) {
 		matrix_set(m, row, col, i);
 
 		if (i % print_interval == 0) {
-			clock_t t = clock();
+			timer_start(t);
 			matrix_smul(m, i);
-			printf("%f\n", (double)(clock() - t) / CLOCKS_PER_SEC);
+			printf("%lu\n", timer_nsec(t));
 
 			expect(m, row, col, i*i);
 		}
