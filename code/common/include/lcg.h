@@ -7,9 +7,7 @@
 #ifndef _LCG_H_
 #define _LCG_H_
 
-/**
- * \brief Forward declaration of structure so members aren't exposed.
- */
+// Forward declaration of structure so members aren't exposed.
 struct _lcg;
 
 /**

@@ -6,9 +6,7 @@
 #ifndef _MATRIX_H_
 #define _MATRIX_H_
 
-/**
- * \brief Forward declaration of structure so members aren't exposed.
- */
+// Forward declaration of structure so members aren't exposed.
 struct _matrix;
 
 /**
