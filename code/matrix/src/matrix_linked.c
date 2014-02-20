@@ -90,6 +90,7 @@ void matrix_set(matrix *m, int row, int col, int val) {
 	}
 
 	matrix_cell* before = m->rows[row];
+	matrix_cell* below = m->cols[col];
 
 	// will exit when we hit start because `m->rows[row]->col` = -1 and
 	// `col` is non-negative.
@@ -97,20 +98,26 @@ void matrix_set(matrix *m, int row, int col, int val) {
 		before = before->left;
 	}
 
-	if (before->left->col == col) {
-		before->left->value = val;
-	} else {
-		matrix_cell* below = m->cols[col];
-		while (below->up->row > row) {
-			below = below->up;
-		}
+	// same reasoning as above.
+	while (below->up->row > row) {
+		below = below->up;
+	}
 
+	if (before->left->col == col) {
+		if (val == 0) {
+			before->left = before->left->left;
+			below->up = below->up->up;
+		} else {
+			before->left->value = val;
+		}
+	} else if (val != 0) {
 		matrix_cell* c = matrix_cell_new(val, below->up, before->left, row, col);
 		before->left = c;
 		below->up = c;
 	}
 }
 
+// FIXME remove nodes if they are multiplied by 0
 void matrix_smul(matrix* m, int x) {
 	int row;
 	for (row = 0; row < matrix_num_rows(m); row++) {
