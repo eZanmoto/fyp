@@ -5,7 +5,6 @@
 #include <stdbool.h>
 #include <stdio.h>
 #include <stdlib.h>
-// #include <time.h>
 
 #include "err.h"
 #include "lcg.h"
