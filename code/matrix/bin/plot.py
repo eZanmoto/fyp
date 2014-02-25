@@ -142,6 +142,6 @@ for impl in impls:
 ax.legend()
 ax.set_axis_off()
 
-outf = "build/fig/time_" + '_'.join(','.join(map(str, args[name])) for name in fields) + ".jpg"
+outf = "build/fig/time_{0}_".format(args['func']) + '_'.join(','.join(map(str, args[name])) for name in fields) + ".jpg"
 print "Writing %s..." % outf
 fig.savefig(outf)
