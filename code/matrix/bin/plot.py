@@ -119,10 +119,11 @@ for i in xrange(len(cs)):
             size, points = map(int, f.readline().split(' '))
             xs = range(0, size**2, (size**2)/points)
             ys = [float(f.readline()[:-1]) for _ in xrange(points)]
-            if len(xs) != len(ys): # FIXME find out why xs is too big sometimes
-                xs = xs[:-1]
 
-            ax.plot(xs, ys, label=impl)
+            # FIXME again, this is a hacky solution to the problem that
+            # sometimes the sizes of `xs` and `ys` are out of sync and should
+            # be fixed as soon as the time becomes available.
+            ax.plot(xs[:args['num_points']], ys[:args['num_points']], label=impl)
 
             for pos in ['top', 'right']:
                 ax.spines[pos].set_color('none')
