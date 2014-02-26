@@ -105,7 +105,12 @@ void matrix_set(matrix *m, int row, int col, int val) {
 
 	if (before->left->col == col) {
 		matrix_cell* c = before->left;
-		if (val == 0) {
+		if (c != below->up) {
+			matrix_cell* d = below->up;
+			FATAL(1, "structural error: `before` points to [%d, %d]"
+				" but `below` points to [%d, %d]",
+				c->row, c->col, d->row, d->col);
+		} else if (val == 0) {
 			before->left = c->left;
 			below->up = c->up;
 			free(c);
