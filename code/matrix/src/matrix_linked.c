@@ -94,12 +94,12 @@ void matrix_set(matrix *m, int row, int col, int val) {
 
 	// will exit when we hit start because `m->rows[row]->col` = -1 and
 	// `col` is non-negative.
-	while (before->left->col > col) {
+	while (col < before->left->col) {
 		before = before->left;
 	}
 
 	// same reasoning as above.
-	while (below->up->row > row) {
+	while (row < below->up->row) {
 		below = below->up;
 	}
 
