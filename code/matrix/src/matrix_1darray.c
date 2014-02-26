@@ -6,6 +6,8 @@
 
 #include "matrix.h"
 
+#include "err.h"
+
 struct _matrix {
 	int* rows;
 	int num_rows;
@@ -57,4 +59,26 @@ void matrix_smul(matrix* m, int x) {
 
 int matrix_get(matrix* m, int row, int col) {
 	return *matrix_at(m, row, col);
+}
+
+matrix *matrix_mmul(matrix* m1, matrix* m2) {
+	if (matrix_num_cols(m1) != matrix_num_rows(m2)) {
+		FATAL(1, "`m1` has %d columns but `m2` has %d rows",
+			matrix_num_cols(m1), matrix_num_rows(m2));
+	}
+	matrix* m = matrix_new(matrix_num_rows(m1), matrix_num_cols(m2));
+
+	int row, col, i;
+	for (row = 0; row < matrix_num_rows(m); row++) {
+		for (col = 0; col < matrix_num_cols(m); col++) {
+			int sum = 0;
+			for (i = 0; i < matrix_num_cols(m1); i++) {
+				sum += matrix_get(m1, row, i) *
+					matrix_get(m2, i, col);
+			}
+			matrix_set(m, row, col, sum);
+		}
+	}
+
+	return m;
 }

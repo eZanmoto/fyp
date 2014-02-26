@@ -138,3 +138,38 @@ int matrix_get(matrix* m, int row, int col) {
 	}
 	return c->col == col ? c->value : 0;
 }
+
+matrix* matrix_mmul(matrix* m1, matrix* m2) {
+	if (matrix_num_cols(m1) != matrix_num_rows(m2)) {
+		FATAL(1, "`m1` has %d columns but `m2` has %d rows",
+			matrix_num_cols(m1), matrix_num_rows(m2));
+	}
+	matrix* m = matrix_new(matrix_num_rows(m1), matrix_num_cols(m2));
+
+	int row, col;
+	for (row = 0; row < matrix_num_rows(m); row++) {
+		for (col = 0; col < matrix_num_cols(m); col++) {
+			matrix_cell* c1 = m1->rows[row]->left;
+			matrix_cell* c2 = m2->cols[col]->up;
+
+			int sum = 0;
+			while (c1->col >= 0 && c2->row >= 0) {
+				if (c1->col == c2->row) {
+					sum += c1->value * c2->value;
+					c1 = c1->left;
+					c2 = c2->up;
+				} else if (c1->col > c2->row) {
+					c1 = c1->left;
+				} else {
+					c2 = c2->up;
+				}
+			}
+
+			// This should give a O(1) insertion time since we're
+			// inserting an earlier element every time.
+			matrix_set(m, row, col, sum);
+		}
+	}
+
+	return m;
+}

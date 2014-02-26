@@ -47,6 +47,11 @@ int matrix_get(matrix* m, int row, int col);
 void matrix_smul(matrix* m, int x);
 
 /**
+ * \brief Multiply the matrix `m1` with the matrix `m2`.
+ */
+matrix* matrix_mmul(matrix* m1, matrix* m2);
+
+/**
  * \brief Free the memory allocated to `m`.
  */
 void matrix_free(matrix* m);
