@@ -104,17 +104,20 @@ void matrix_set(matrix *m, int row, int col, int val) {
 	}
 
 	if (before->left->col == col) {
+		matrix_cell* c = before->left;
 		if (val == 0) {
-			before->left = before->left->left;
-			below->up = below->up->up;
+			before->left = c->left;
+			below->up = c->up;
+			free(c);
 		} else {
-			before->left->value = val;
+			c->value = val;
 		}
 	} else if (val != 0) {
 		matrix_cell* c = matrix_cell_new(val, below->up, before->left, row, col);
 		before->left = c;
 		below->up = c;
 	}
+	// Don't do anything if `val` == 0 and cell doesn't exist
 }
 
 // FIXME remove nodes if they are multiplied by 0
