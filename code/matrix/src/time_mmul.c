@@ -1,5 +1,5 @@
-// `time_smul <size> <n>` populates a <size>x<size> matrix cell by cell and
-// prints the timing of `matrix_smul()` on that matrix <n> times.
+// `time_mmul <size> <n>` populates a <size>x<size> matrix cell by cell and
+// prints the timing of `matrix_mmul()` on that matrix <n> times.
 
 #include <math.h>
 #include <stdbool.h>
