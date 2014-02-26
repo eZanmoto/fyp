@@ -1,3 +1,6 @@
+// `time_mmul_s <size> <n>` prints the timing of `matrix_mmul()` on <n>
+// fully-populated matrices of uniformly distributed sizes from 0 to <size>.
+
 #include <math.h>
 #include <stdbool.h>
 #include <stdio.h>
