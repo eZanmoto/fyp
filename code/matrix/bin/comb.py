@@ -27,5 +27,5 @@ def combs(feats):
 
 
 if __name__ == '__main__':
-    for xs in combs([range(2), range(3), range(4) ]):
+    for xs in combs([range(2), range(3), range(4)]):
         print xs
