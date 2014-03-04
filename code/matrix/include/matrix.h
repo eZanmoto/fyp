@@ -1,6 +1,10 @@
 /**
  * \file matrix.h
  * \brief Provides methods for interfacing with a matrix implementation.
+ *
+ * `void` functions that take a `matrix*` as their first parameter modify the
+ * matrix in place. Functions that return `matrix*` don't modify their
+ * parameters, but instead return a new matrix as the result.
  */
 
 #ifndef _MATRIX_H_
