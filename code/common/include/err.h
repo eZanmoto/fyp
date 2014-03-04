@@ -23,4 +23,13 @@
 	fprintf(stderr, "[%s:%d]" fmt, __FILE__, __LINE__, ##__VA_ARGS__); \
 	exit(code)
 
+/**
+ * \brief Exit if `cond` isn't `true`.
+ *
+ * Example usage:
+ * \code ASSERT(1 == 1); \endcode
+ */
+#define ASSERT(cond) \
+	if (!cond) { FATAL(1, "assertion failed: %s", #cond); }
+
 #endif
