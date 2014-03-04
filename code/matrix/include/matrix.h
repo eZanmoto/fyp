@@ -61,6 +61,18 @@ matrix* matrix_mmul(matrix* m1, matrix* m2);
 void matrix_free(matrix* m);
 
 /**
+ * \brief Augment `b` to the right of `a`.
+ *
+ * `a` and `b` must have the same number of rows.
+ */
+matrix* matrix_aug(matrix* a, matrix* b);
+
+/**
+ * \brief Reduce `m` to row reduced echelon form, or `NULL` if `m` is singular.
+ */
+void matrix_row_reduce(matrix* m);
+
+/**
  * \brief Return a string representation of `m`.
  */
 char *matrix_str(matrix* m);
