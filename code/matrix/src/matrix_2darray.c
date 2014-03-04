@@ -9,17 +9,17 @@
 #include "err.h"
 
 struct _matrix {
-	int** rows;
+	double** rows;
 	int num_rows;
 	int num_cols;
 };
 
 matrix* matrix_new(int num_rows, int num_cols) {
 	matrix* m = malloc(sizeof(matrix));
-	m->rows = malloc(sizeof(int*) * num_rows);
+	m->rows = malloc(sizeof(double*) * num_rows);
 	int i;
 	for (i = 0; i < num_rows; i++) {
-		m->rows[i] = malloc(sizeof(int) * num_cols);
+		m->rows[i] = malloc(sizeof(double) * num_cols);
 	}
 	m->num_rows = num_rows;
 	m->num_cols = num_cols;
@@ -48,11 +48,11 @@ void matrix_free(matrix* m) {
 	free(m);
 }
 
-void matrix_set(matrix* m, int row, int col, int val) {
+void matrix_set(matrix* m, int row, int col, double val) {
 	m->rows[row][col] = val;
 }
 
-void matrix_smul(matrix* m, int x) {
+void matrix_smul(matrix* m, double x) {
 	int i, j;
 	for (i = 0; i < matrix_num_rows(m); i++) {
 		for (j = 0; j < matrix_num_cols(m); j++) {
@@ -61,7 +61,7 @@ void matrix_smul(matrix* m, int x) {
 	}
 }
 
-int matrix_get(matrix* m, int row, int col) {
+double matrix_get(matrix* m, int row, int col) {
 	return m->rows[row][col];
 }
 

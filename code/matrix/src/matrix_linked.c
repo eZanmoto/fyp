@@ -10,7 +10,7 @@
 #include "err.h"
 
 typedef struct matrix_cell {
-	int value;
+	double value;
 	struct matrix_cell* up;
 	struct matrix_cell* left;
 	int row;
@@ -83,8 +83,9 @@ void matrix_free(matrix* m) {
 	free(m);
 }
 
-void matrix_set(matrix *m, int row, int col, int val) {
-	if (row >= matrix_num_rows(m) || col >= matrix_num_cols(m)) {
+void matrix_set(matrix *m, int row, int col, double val) {
+	if (row < 0 || row >= matrix_num_rows(m)
+			|| col < 0 || col >= matrix_num_cols(m)) {
 		FATAL(1, "cell [%d, %d] out of range ([%d, %d])",
 			row, col, matrix_num_rows(m), matrix_num_cols(m));
 	}
@@ -125,19 +126,25 @@ void matrix_set(matrix *m, int row, int col, int val) {
 	// Don't do anything if `val` == 0 and cell doesn't exist
 }
 
-// FIXME remove nodes if they are multiplied by 0
-void matrix_smul(matrix* m, int x) {
-	int row;
-	for (row = 0; row < matrix_num_rows(m); row++) {
-		matrix_cell* cur = m->rows[row]->left;
-		while (cur->col > -1) {
-			cur->value *= x;
-			cur = cur->left;
+void matrix_smul(matrix* m, double x) {
+	if (x == 0) {
+		int rows = matrix_num_rows(m);
+		int cols = matrix_num_cols(m);
+		free(m);
+		m = matrix_new(rows, cols);
+	} else {
+		int row;
+		for (row = 0; row < matrix_num_rows(m); row++) {
+			matrix_cell* cur = m->rows[row]->left;
+			while (cur->col > -1) {
+				cur->value *= x;
+				cur = cur->left;
+			}
 		}
 	}
 }
 
-int matrix_get(matrix* m, int row, int col) {
+double matrix_get(matrix* m, int row, int col) {
 	matrix_cell* c = m->rows[row]->left;
 	// will exit when we hit start because `m->rows[row]->col` = -1 and
 	// `col` is non-negative.

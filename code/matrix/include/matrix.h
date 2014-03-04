@@ -38,17 +38,17 @@ int matrix_num_cols(matrix* m);
 /** 
  * \brief Set the value of `m` at cell (`row`, `col`) to `val`.
  */
-void matrix_set(matrix* m, int row, int col, int val);
+void matrix_set(matrix* m, int row, int col, double val);
 
 /** 
  * \brief Return the value of `m` at cell (`row`, `col`).
  */
-int matrix_get(matrix* m, int row, int col);
+double matrix_get(matrix* m, int row, int col);
 
 /** 
  * \brief Multiply `m` by the scalar `x`.
  */
-void matrix_smul(matrix* m, int x);
+void matrix_smul(matrix* m, double x);
 
 /**
  * \brief Multiply the matrix `m1` with the matrix `m2`.

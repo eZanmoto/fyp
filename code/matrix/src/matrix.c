@@ -14,7 +14,7 @@ char* matrix_str(matrix* m) {
 	int i, j;
 	for (i = 0; i < matrix_num_rows(m); i++) {
 		for (j = 0; j < matrix_num_cols(m); j++) {
-			sprintf(str + len, "%d ", matrix_get(m, i, j));
+			sprintf(str + len, "%8.1f ", matrix_get(m, i, j));
 			len += strlen(str + len);
 		}
 		str[len - 1] = '\n'; // replace the last space with a newline
