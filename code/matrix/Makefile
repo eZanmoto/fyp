@@ -7,6 +7,8 @@
 # build-dat:    Build data files
 # build-doc:    Build documentation
 # build-egs:    Build example binaries
+# check:        Run all tests
+# check-egs:    Tests example code
 # clean:        Removes the local build files
 
 # Dependency project directories
@@ -119,6 +121,18 @@ $(TGTEGS)/%_$(SIG): $(TGTOBJ)/%.o $(TGTOBJ)/matrix.o $(TGTOBJ)/matrix_$(IMPL).o
 
 $(TGTOBJ)/%.o: $(EGSDIR)/%.c $(INCLUDES) $(TGTOBJ) | $(TGTEGS)
 	$(CC) $(CFLAGS) $(CINCS) -c $< -o $@
+
+.PHONY: check
+check:
+	for IMPL in $(IMPLS) ; do \
+		IMPL=$$IMPL make check-egs ; \
+	done
+
+.PHONY: check-egs
+check-egs: $(addprefix check-,$(EXAMPLES))
+
+check-%: $(EGSDIR)/%.c $(TGTEGS)/%_$(SIG)
+	bin/check_eg.sh $^ $(TGTBIN)
 
 .PHONY: clean
 clean:

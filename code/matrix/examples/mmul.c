@@ -11,19 +11,9 @@ void matrix_fill(matrix* m) {
 	}
 }
 
-matrix* matrix_id(int size) {
-	matrix* id = matrix_new(size, size);
-	int i;
-	for (i = 0; i < size; i++) {
-		matrix_set(id, i, i, 1);
-	}
-	return id;
-}
-
 int main() {
 	matrix* m1 = matrix_new(4, 3);
 	matrix* m2 = matrix_new(3, 4);
-	// matrix* id = matrix_id(4);
 
 	// 0 0 0 0    0  1  2
 	// 0 0 0 0 -> 3  4  5
@@ -36,15 +26,12 @@ int main() {
 	// 0 0 0 0    8  9 10 11
 	matrix_fill(m2);
 
-	//  20  23  26  29
-	//  56  68  80  92
-	//  92 113 134 155
-	// 128 158 188 218
 	matrix* m = matrix_mmul(m1, m2);
 
-	// No change
-	// matrix_mmul(m, id);
-
+	// >    20.0     23.0     26.0     29.0
+	// >    56.0     68.0     80.0     92.0
+	// >    92.0    113.0    134.0    155.0
+	// >   128.0    158.0    188.0    218.0
 	printf("%s\n\n", matrix_str(m));
 
 	matrix_free(m);
