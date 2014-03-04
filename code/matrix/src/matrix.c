@@ -36,21 +36,6 @@ void matrix_swap_rows(matrix* m, int a, int b) {
 	}
 }
 
-matrix* matrix_aug(matrix* a, matrix* b) {
-	ASSERT(matrix_num_rows(a) == matrix_num_rows(b));
-
-	int row, col, mid = matrix_num_cols(a);
-	matrix* aug = matrix_new(matrix_num_rows(a), mid + matrix_num_cols(b));
-	for (row = 0; row < matrix_num_rows(aug); row++) {
-		for (col = 0; col < matrix_num_cols(aug); col++) {
-			bool in_b = mid <= col;
-			matrix_set(aug, row, col,
-				matrix_get(in_b ? b : a, row, col - mid * in_b));
-		}
-	}
-	return aug;
-}
-
 void matrix_row_smul(matrix* m, int row, double x) {
 	int col;
 	for (col = 0; col < matrix_num_cols(m); col++) {
