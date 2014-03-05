@@ -84,12 +84,6 @@ void matrix_free(matrix* m) {
 }
 
 void matrix_set(matrix *m, int row, int col, double val) {
-	if (row < 0 || row >= matrix_num_rows(m)
-			|| col < 0 || col >= matrix_num_cols(m)) {
-		FATAL(1, "cell [%d, %d] out of range ([%d, %d])",
-			row, col, matrix_num_rows(m), matrix_num_cols(m));
-	}
-
 	matrix_cell* before = m->rows[row];
 	matrix_cell* below = m->cols[col];
 
