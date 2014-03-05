@@ -113,3 +113,31 @@ void matrix_row_reduce(matrix* m) {
 		col++;
 	}
 }
+
+matrix* matrix_inv(matrix* m) {
+	ASSERT(matrix_num_rows(m) == matrix_num_cols(m));
+
+	int row, col, w = matrix_num_rows(m);
+
+	matrix* id = matrix_new(w, w);
+	for (row = 0; row < w; row++) {
+		matrix_set(id, row, row, 1.0);
+	}
+
+	matrix* aug = matrix_aug(m, id);
+	matrix_row_reduce(aug);
+	if (!aug) {
+		matrix_free(id);
+		return NULL;
+	}
+
+	matrix* b = id; // Recycle the memory allocated to `id`
+	for (row = 0; row < w; row++) {
+		for (col = 0; col < w; col++) {
+			matrix_set(b, row, col, matrix_get(aug, row, w + col));
+		}
+	}
+	matrix_free(aug);
+
+	return b;
+}

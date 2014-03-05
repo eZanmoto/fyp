@@ -73,6 +73,13 @@ matrix* matrix_aug(matrix* a, matrix* b);
 void matrix_row_reduce(matrix* m);
 
 /**
+ * \brief The inverse of `m`.
+ *
+ * `m` must be square.
+ */
+matrix* matrix_inv(matrix* m);
+
+/**
  * \brief Return a string representation of `m`.
  */
 char *matrix_str(matrix* m);
