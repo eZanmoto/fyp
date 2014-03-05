@@ -13,14 +13,6 @@
 
 #include "matrix.h"
 
-void expect(matrix *m, int row, int col, int expected) {
-	int actual = matrix_get(m, row, col);
-	if (actual != expected) {
-		FATAL(2, "m[%d][%d] expected %d, got %d\n",
-			row, col, expected, actual);
-	}
-}
-
 void fill(matrix* m) {
 	int rows = matrix_num_rows(m);
 	int num_cells = rows * matrix_num_cols(m);
