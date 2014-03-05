@@ -16,11 +16,11 @@
 void fill(matrix* m) {
 	int rows = matrix_num_rows(m);
 	int num_cells = rows * matrix_num_cols(m);
-	lcg* lcg = lcg_new(num_cells, 0);
+	lcg* lcg = lcg_new((unsigned int) num_cells, 0);
 
 	int i;
 	for (i = 0; i < num_cells; i++) {
-		unsigned int next = lcg_next(lcg);
+		int next = (int) lcg_next(lcg);
 		matrix_set(m, next / rows, next % rows, i);
 	}
 }
