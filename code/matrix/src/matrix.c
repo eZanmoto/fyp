@@ -9,15 +9,19 @@
 #include "matrix.h"
 
 #include "err.h"
+#include "new.h"
 
 char* matrix_str(matrix* m) {
-	char* str = malloc(1024);
+	char* str;
+	NEW(str, 1024);
 	int len = 0;
 
 	int i, j;
 	for (i = 0; i < matrix_num_rows(m); i++) {
 		for (j = 0; j < matrix_num_cols(m); j++) {
-			sprintf(str + len, "%8.1f ", matrix_get(m, i, j));
+			double v = matrix_get(m, i, j);
+			// Convert -0 to 0
+			sprintf(str + len, "%8.1f ", v == 0 ? 0 : v);
 			len += strlen(str + len);
 		}
 		str[len - 1] = '\n'; // replace the last space with a newline
@@ -71,7 +75,7 @@ void matrix_elim(matrix* m, int row, int col) {
 				matrix_add(m, row_, col_,
 					-(a * matrix_get(m, row, col_)));
 			}
-			matrix_set(m, row_, col, 0);
+			matrix_set(m, row_, col, 0.0);
 		}
 	}
 }

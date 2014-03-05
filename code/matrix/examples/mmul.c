@@ -6,7 +6,8 @@ void matrix_fill(matrix* m) {
 	int row, col;
 	for (row = 0; row < matrix_num_rows(m); row++) {
 		for (col = 0; col < matrix_num_cols(m); col++) {
-			matrix_set(m, row, col, row * matrix_num_cols(m) + col);
+			double val = row * matrix_num_cols(m) + col;
+			matrix_set(m, row, col, val);
 		}
 	}
 }

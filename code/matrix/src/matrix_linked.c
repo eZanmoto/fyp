@@ -24,7 +24,7 @@ struct _matrix {
 	int num_cols;
 };
 
-matrix_cell* matrix_cell_new(int val, matrix_cell* up, matrix_cell* left,
+matrix_cell* matrix_cell_new(double val, matrix_cell* up, matrix_cell* left,
 		int row, int col) {
 	matrix_cell* c = malloc(sizeof(matrix_cell));
 
@@ -45,13 +45,13 @@ matrix* matrix_new(int num_rows, int num_cols) {
 
 	m->rows = malloc(sizeof(matrix_cell*) * num_rows);
 	for (i = 0; i < num_rows; i++) {
-		m->rows[i] = matrix_cell_new(0, NULL, NULL, i, -1);
+		m->rows[i] = matrix_cell_new(0.0, NULL, NULL, i, -1);
 		m->rows[i]->left = m->rows[i];
 	}
 
 	m->cols = malloc(sizeof(matrix_cell*) * num_cols);
 	for (i = 0; i < num_cols; i++) {
-		m->cols[i] = matrix_cell_new(0, NULL, NULL, -1, i);
+		m->cols[i] = matrix_cell_new(0.0, NULL, NULL, -1, i);
 		m->cols[i]->up = m->cols[i];
 	}
 
@@ -167,7 +167,7 @@ matrix* matrix_mmul(matrix* m1, matrix* m2) {
 			matrix_cell* c1 = m1->rows[row]->left;
 			matrix_cell* c2 = m2->cols[col]->up;
 
-			int sum = 0;
+			double sum = 0;
 			while (c1->col >= 0 && c2->row >= 0) {
 				if (c1->col == c2->row) {
 					sum += c1->value * c2->value;

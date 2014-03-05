@@ -53,7 +53,7 @@ endif
 ifndef OPT
 OPT:=0
 endif
-CFLAGS:=-Wall -Werror -g -O$(OPT)
+CFLAGS:=-Wall -Wextra -Wconversion -Werror -g -O$(OPT)
 CINCS:=$(addprefix -I,$(INCDIRS))
 CLIBS:=$(addprefix -L,$(LIBDIRS)) $(addprefix -l,common)
 
