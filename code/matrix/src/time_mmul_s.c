@@ -13,14 +13,6 @@
 
 #include "matrix.h"
 
-void expect(matrix *m, int row, int col, int expected) {
-	int actual = matrix_get(m, row, col);
-	if (actual != expected) {
-		FATAL(2, "m[%d][%d] expected %d, got %d\n",
-			row, col, expected, actual);
-	}
-}
-
 int main(int argc, char** argv) {
 	if (argc != 3) {
 		fprintf(stderr, "Usage: %s <size> <n>\n", argv[0]);
