@@ -11,6 +11,10 @@
 # check-egs:    Tests example code
 # clean:        Removes the local build files
 
+# Don't remove object files once binaries are generated so we can use their
+# symbol information.
+.SECONDARY:
+
 # Dependency project directories
 COMMON:=../common
 
