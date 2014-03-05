@@ -130,6 +130,9 @@ $(TGTOBJ)/%.o: $(EGSDIR)/%.c $(INCLUDES) $(TGTOBJ) | $(TGTEGS)
 check:
 	for IMPL in $(IMPLS) ; do \
 		IMPL=$$IMPL make check-egs ; \
+		if [ $$? -ne 0 ] ; then \
+			exit 2 ; \
+		fi ; \
 	done
 
 .PHONY: check-egs
