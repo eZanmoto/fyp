@@ -8,6 +8,7 @@
 #include "matrix.h"
 
 #include "err.h"
+#include "new.h"
 
 typedef struct matrix_cell {
 	double value;
@@ -42,7 +43,7 @@ matrix* matrix_new(int num_rows, int num_cols) {
 	m->num_cols = num_cols;
 
 	int i;
-	m->rows = malloc(sizeof(matrix_cell*) * num_rows);
+	NEW(m->rows, (unsigned long) num_rows)
 	for (i = 0; i < num_rows; i++) {
 		m->rows[i] = matrix_cell_new(0.0, NULL, i, -1);
 		m->rows[i]->left = m->rows[i];

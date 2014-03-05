@@ -7,6 +7,7 @@
 #include "matrix.h"
 
 #include "err.h"
+#include "new.h"
 
 struct _matrix {
 	double** rows;
@@ -16,10 +17,10 @@ struct _matrix {
 
 matrix* matrix_new(int num_rows, int num_cols) {
 	matrix* m = malloc(sizeof(matrix));
-	m->rows = malloc(sizeof(double*) * num_rows);
+	NEW(m->rows, (unsigned long) num_rows);
 	int i;
 	for (i = 0; i < num_rows; i++) {
-		m->rows[i] = malloc(sizeof(double) * num_cols);
+		NEW(m->rows[i], (unsigned long) num_cols);
 	}
 	m->num_rows = num_rows;
 	m->num_cols = num_cols;
