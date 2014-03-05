@@ -43,13 +43,13 @@ matrix* matrix_new(int num_rows, int num_cols) {
 	m->num_cols = num_cols;
 	int i;
 
-	m->rows = malloc(sizeof(matrix_cell*) * num_rows);
+	m->rows = malloc(sizeof(matrix_cell*) * (unsigned long)num_rows);
 	for (i = 0; i < num_rows; i++) {
 		m->rows[i] = matrix_cell_new(0.0, NULL, NULL, i, -1);
 		m->rows[i]->left = m->rows[i];
 	}
 
-	m->cols = malloc(sizeof(matrix_cell*) * num_cols);
+	m->cols = malloc(sizeof(matrix_cell*) * (unsigned long)num_cols);
 	for (i = 0; i < num_cols; i++) {
 		m->cols[i] = matrix_cell_new(0.0, NULL, NULL, -1, i);
 		m->cols[i]->up = m->cols[i];
