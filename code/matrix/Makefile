@@ -93,7 +93,7 @@ $(TGTDAT)/%_$(SIZE)_$(NUM_POINTS).txt: $(TGTBIN)/% $(TGTBIN)/libcommon.so | $(TG
 	$(LIB_PATH)=$(TGTBIN):$$$(LIB_PATH) $< $(SIZE) $(NUM_POINTS) > $@~
 	mv $@~ $@
 
-$(TGTBIN)/libcommon.so $(TGTEGS)/libcommon.so: $(COMMON)/build/libcommon.so
+$(TGTDIR)/%/libcommon.so: $(COMMON)/build/libcommon.so | $(TGTDIR)/%
 	ln -s ../../$< $@
 
 $(TGTBIN) $(TGTDAT) $(TGTDOC) $(TGTEGS) $(TGTOBJ): | $(TGTDIR)
