@@ -138,8 +138,8 @@ check:
 .PHONY: check-egs
 check-egs: $(addprefix check-,$(EXAMPLES))
 
-check-%: $(EGSDIR)/%.c $(TGTEGS)/%_$(SIG)
-	bin/check_eg.sh $^ $(TGTBIN)
+check-%: $(EGSDIR)/%.c $(TGTEGS)/%_$(SIG) $(TGTEGS)/libcommon.so
+	bin/check_eg.sh $(wordlist 1,2,$^) $(TGTEGS)
 
 .PHONY: clean
 clean:
