@@ -103,7 +103,7 @@ $(TGTDIR):
 	mkdir $@
 
 .PHONY: build-bin
-build-bin: $(patsubst %,$(TGTBIN)/%_$(SIG),$(TARGETS))
+build-bin: $(patsubst %,$(TGTBIN)/%_$(SIG),$(TARGETS)) $(TGTBIN)/libcommon.so
 
 $(TGTBIN)/%_$(SIG): $(TGTOBJ)/%.o $(TGTOBJ)/matrix.o $(TGTOBJ)/matrix_$(IMPL).o | $(TGTBIN)
 	$(CC) $(CFLAGS) $(CLIBS) $^ -o $@
