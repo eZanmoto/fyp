@@ -6,12 +6,19 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#include "err.h"
-#include "lcg.h"
 #include "new.h"
 #include "timer.h"
 
 #include "matrix.h"
+
+void fill(matrix* m) {
+	int rows = matrix_num_rows(m);
+	int i;
+	for (i = 0; i < rows * matrix_num_cols(m); i++) {
+		int next = i;
+		matrix_set(m, next / rows, next % rows, (double) i);
+	}
+}
 
 int main(int argc, char** argv) {
 	if (argc != 3) {
@@ -23,15 +30,10 @@ int main(int argc, char** argv) {
 	printf("%d %d\n", max_size, n);
 
 	timer* t = timer_new();
-	int size, i;
+	int size;
 	for (size = 0; size < max_size; size += max_size / n) {
 		matrix* m = matrix_new(size, size);
-		int num_cells = size * size;
-		lcg* lcg = lcg_new((unsigned int) num_cells, 0);
-		for (i = 0; i < num_cells; i++) {
-			int next = (int) lcg_next(lcg);
-			matrix_set(m, next / size, next % size, (double) i);
-		}
+		fill(m);
 
 		timer_start(t);
 		matrix_mmul(m, m);
