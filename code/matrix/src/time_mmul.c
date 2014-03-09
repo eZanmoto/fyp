@@ -25,17 +25,17 @@ int main(int argc, char** argv) {
 	matrix* m = matrix_new(size, size);
 
 	int num_cells = size * size;
-	lcg* lcg = lcg_new(num_cells, 0);
+	lcg* lcg = lcg_new((unsigned int) num_cells, 0);
 
 	int print_interval = num_cells / n;
 	int i;
 	timer* t = timer_new();
 	for (i = 0; i < num_cells; i++) {
-		unsigned int next = lcg_next(lcg);
+		int next = (int) lcg_next(lcg);
 		int row =  next / size;
 		int col = next % size;
 
-		matrix_set(m, row, col, i);
+		matrix_set(m, row, col, (double) i);
 
 		if (i % print_interval == 0) {
 			timer_start(t);

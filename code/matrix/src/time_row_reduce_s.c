@@ -21,7 +21,7 @@ void fill(matrix* m) {
 	int i;
 	for (i = 0; i < num_cells; i++) {
 		int next = (int) lcg_next(lcg);
-		matrix_set(m, next / rows, next % rows, i);
+		matrix_set(m, next / rows, next % rows, (double) i);
 	}
 }
 

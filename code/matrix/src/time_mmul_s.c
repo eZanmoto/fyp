@@ -27,10 +27,10 @@ int main(int argc, char** argv) {
 	for (size = 0; size < max_size; size += max_size / n) {
 		matrix* m = matrix_new(size, size);
 		int num_cells = size * size;
-		lcg* lcg = lcg_new(num_cells, 0);
+		lcg* lcg = lcg_new((unsigned int) num_cells, 0);
 		for (i = 0; i < num_cells; i++) {
-			unsigned int next = lcg_next(lcg);
-			matrix_set(m, next / size, next % size, i);
+			int next = (int) lcg_next(lcg);
+			matrix_set(m, next / size, next % size, (double) i);
 		}
 
 		timer_start(t);

@@ -27,7 +27,7 @@ matrix* matrix_new(int num_rows, int num_cols) {
 
 	// Allocated memory is not guaranteed to be zeroed out, but that is a
 	// promise made by this function.
-	matrix_smul(m, 0);
+	matrix_smul(m, 0.0);
 
 	return m;
 }
@@ -76,7 +76,7 @@ matrix *matrix_mmul(matrix* m1, matrix* m2) {
 	int row, col, i;
 	for (row = 0; row < matrix_num_rows(m); row++) {
 		for (col = 0; col < matrix_num_cols(m); col++) {
-			int sum = 0;
+			double sum = 0;
 			for (i = 0; i < matrix_num_cols(m1); i++) {
 				sum += matrix_get(m1, row, i) *
 					matrix_get(m2, i, col);
