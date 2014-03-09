@@ -19,7 +19,9 @@ if [ $# -lt 1 ] ; then
 fi
 
 for CC in $* ; do
-	run bin/plot.py -f smul,mmul,mmul_s,row_reduce_s -s 100 -n 10 -c $CC
+	for OPT in 0 1 2 3 ; do
+		run bin/plot.py -f smul,mmul,mmul_s,row_reduce_s -s 100 -n 10 -c $CC -o $OPT
+	done
 
 	for IMPL in smul mmul mmul_s row_reduce_s ; do
 		run bin/plot.py -f $IMPL -s 100 -n 10 -c $CC -o 0,1,2
