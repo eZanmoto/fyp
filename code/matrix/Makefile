@@ -11,10 +11,6 @@
 # check-egs:    Tests example code
 # clean:        Removes the local build files
 
-# Don't remove object files once binaries are generated so we can use their
-# symbol information.
-.SECONDARY:
-
 # Dependency project directories
 COMMON:=../common
 
@@ -105,11 +101,8 @@ $(TGTDIR):
 .PHONY: build-bin
 build-bin: $(patsubst %,$(TGTBIN)/%_$(SIG),$(TARGETS)) $(TGTBIN)/libcommon.so
 
-$(TGTBIN)/%_$(SIG): $(TGTOBJ)/%.o $(TGTOBJ)/matrix.o $(TGTOBJ)/matrix_$(IMPL).o | $(TGTBIN)
-	$(CC) $(CFLAGS) $(CLIBS) $^ -o $@
-
-$(TGTOBJ)/%.o: $(SRCDIR)/%.c $(INCLUDES) | $(TGTOBJ)
-	$(CC) $(CFLAGS) $(CINCS) -c $< -o $@
+$(TGTBIN)/%_$(SIG): $(SRCDIR)/%.c $(SRCDIR)/matrix.c $(SRCDIR)/matrix_$(IMPL).c | $(TGTBIN)
+	$(CC) $(CFLAGS) $(CLIBS) $(CINCS) $^ -o $@
 
 .PHONY: build-doc
 build-doc: | $(TGTDOC)/html
@@ -120,11 +113,8 @@ $(TGTDOC)/html: $(SRCDIR) $(INCDIR) Doxyfile | $(TGTDOC)
 .PHONY: build-egs
 build-egs: $(patsubst %,$(TGTEGS)/%_$(SIG),$(EXAMPLES)) $(TGTEGS)/libcommon.so
 
-$(TGTEGS)/%_$(SIG): $(TGTOBJ)/%.o $(TGTOBJ)/matrix.o $(TGTOBJ)/matrix_$(IMPL).o
-	$(CC) $(CFLAGS) $(CLIBS) $^ -o $@
-
-$(TGTOBJ)/%.o: $(EGSDIR)/%.c $(INCLUDES) $(TGTOBJ) | $(TGTEGS)
-	$(CC) $(CFLAGS) $(CINCS) -c $< -o $@
+$(TGTEGS)/%_$(SIG): $(TGTOBJ)/%.c $(TGTOBJ)/matrix.c $(TGTOBJ)/matrix_$(IMPL).c
+	$(CC) $(CFLAGS) $(CLIBS) $(CINCS) $^ -o $@
 
 .PHONY: check
 check:
