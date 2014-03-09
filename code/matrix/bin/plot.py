@@ -72,7 +72,7 @@ parser = argparse.ArgumentParser(description='Plot the timing of a function')
 parser.add_argument('-f', '--funcs', type=strs, default=glob_match("src/time_*.c"), help="matrix function to time")
 parser.add_argument('-c', '--cc', type=strs, default=['cc'], help="C compiler")
 parser.add_argument('-o', '--opt', type=ints, default=[0], help="C compiler optimization")
-parser.add_argument('-n', '--num_points', type=int, default=10, help="number of graph points")
+parser.add_argument('-n', '--num_points', type=int, default=100, help="number of graph points")
 parser.add_argument('-s', '--size', type=ints, default=[100], help="matrix width and height")
 
 args = vars(parser.parse_args())
