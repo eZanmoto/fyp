@@ -62,10 +62,10 @@ SIG:=$(IMPL)_$(CC)_$(OPT)
 
 # Timing parameters
 ifndef SIZE
-SIZE:=64
+SIZE:=100
 endif
 ifndef NUM_POINTS
-NUM_POINTS:=32
+NUM_POINTS:=10
 endif
 
 # Variables for platform independence
