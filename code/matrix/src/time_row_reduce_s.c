@@ -28,7 +28,7 @@ int main(int argc, char** argv) {
 	}
 	int max_size = atoi(argv[1]);
 	int n = atoi(argv[2]);
-	printf("%d %d\n", max_size, n);
+	printf("%d\n", n);
 
 	timer* t = timer_new();
 	int size, increment = max_size / n;
@@ -39,7 +39,7 @@ int main(int argc, char** argv) {
 
 		timer_start(t);
 		matrix_row_reduce(m);
-		printf("%lu\n", timer_nsec(t));
+		printf("%d %lu\n", size, timer_nsec(t));
 		ASSERT(m);
 		matrix_free(m);
 	}

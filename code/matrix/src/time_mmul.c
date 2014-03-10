@@ -19,7 +19,7 @@ int main(int argc, char** argv) {
 	}
 	int size = atoi(argv[1]);
 	int n = atoi(argv[2]);
-	printf("%d %d\n", size, n);
+	printf("%d\n", n);
 
 	matrix* m = matrix_new(size, size);
 
@@ -37,7 +37,7 @@ int main(int argc, char** argv) {
 		if (i % print_interval == 0) {
 			timer_start(t);
 			m = matrix_mmul(m, m);
-			printf("%lu\n", timer_nsec(t));
+			printf("%2f %lu\n", ((i + 0.0) / num_cells) * 100, timer_nsec(t));
 		}
 	}
 	matrix_free(m);
