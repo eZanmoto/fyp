@@ -103,10 +103,16 @@ for i in xrange(len(cs)):
     })
 
 outf = "build/dat/time_" + '_'.join(','.join(map(str, args[name])) for name in fields) + ".json"
+
+if len(args['func']) > 1:
+    x_title = "Size"
+else:
+    x_title = "Size" if args['func'][0].endswith("_growth") else "Density (%)"
+
 with open(outf, 'w') as f:
     json.dump({
             'title': make_fmt((f.upper(), args[f][0]) for f in fields if len(args[f]) == 1),
-            'x-title': "Density (%)",
+            'x-title': x_title,
             'y-title': "Time (ns)",
             'share-x': True,
             'share-y': False,
