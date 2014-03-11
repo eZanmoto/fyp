@@ -84,6 +84,11 @@ void matrix_free(matrix* m) {
 }
 
 void matrix_set(matrix *m, int row, int col, double val) {
+	ASSERT(0 <= row);
+	ASSERT(row < matrix_num_rows(m));
+	ASSERT(0 <= col);
+	ASSERT(col < matrix_num_cols(m));
+
 	matrix_cell* before = m->rows[row];
 	matrix_cell* below = m->cols[col];
 
@@ -135,6 +140,11 @@ void matrix_smul(matrix* m, double x) {
 }
 
 double matrix_get(matrix* m, int row, int col) {
+	ASSERT(0 <= row);
+	ASSERT(row < matrix_num_rows(m));
+	ASSERT(0 <= col);
+	ASSERT(col < matrix_num_cols(m));
+
 	matrix_cell* c = m->rows[row]->left;
 	// will exit when we hit start because `m->rows[row]->col` = -1 and
 	// `col` is non-negative.

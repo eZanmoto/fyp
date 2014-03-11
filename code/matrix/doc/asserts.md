@@ -38,7 +38,13 @@ that constraints will usually provide a description of what went wrong, because
 a developer may not have access to, or want to investigate, the code at the
 location where the error occurred. Invariants, however, are (or should be)
 self-descriptive, and will require that the source code at that location be
-examined.
+examined. Note that `assert` statements should only test a single variable at a
+time, or, more helpful for debugging, a single condition. For example, the above
+invariant could be made more illuminating (in the author's opinion) if broken
+into two invariants, as follows:
+
+    ASSERT(0 <= row);
+    ASSERT(row <= num_rows);
 
 The key difference between invariants and constraints is the fact that
 invariants can be disabled. Once confidence has been built that the invariants

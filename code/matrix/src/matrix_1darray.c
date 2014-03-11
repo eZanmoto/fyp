@@ -42,6 +42,11 @@ void matrix_free(matrix* m) {
 }
 
 double* matrix_at(matrix* m, int row, int col) {
+	ASSERT(0 <= row);
+	ASSERT(row < matrix_num_rows(m));
+	ASSERT(0 <= col);
+	ASSERT(col < matrix_num_cols(m));
+
 	return &(m->rows[row * matrix_num_cols(m) + col]);
 }
 

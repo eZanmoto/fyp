@@ -50,6 +50,11 @@ void matrix_free(matrix* m) {
 }
 
 void matrix_set(matrix* m, int row, int col, double val) {
+	ASSERT(0 <= row);
+	ASSERT(row < matrix_num_rows(m));
+	ASSERT(0 <= col);
+	ASSERT(col < matrix_num_cols(m));
+
 	m->rows[row][col] = val;
 }
 
@@ -63,6 +68,11 @@ void matrix_smul(matrix* m, double x) {
 }
 
 double matrix_get(matrix* m, int row, int col) {
+	ASSERT(0 <= row);
+	ASSERT(row < matrix_num_rows(m));
+	ASSERT(0 <= col);
+	ASSERT(col < matrix_num_cols(m));
+
 	return m->rows[row][col];
 }
 
