@@ -24,7 +24,6 @@ TGTBIN:=$(TGTDIR)/bin
 TGTDAT:=$(TGTDIR)/dat
 TGTDOC:=$(TGTDIR)/doc
 TGTEGS:=$(TGTDIR)/examples
-TGTOBJ:=$(TGTDIR)/objects
 
 INCDIRS:=include $(COMMON)/include
 LIBDIRS:=$(COMMON)/build
@@ -92,7 +91,7 @@ $(TGTDAT)/%_$(SIZE)_$(NUM_POINTS).txt: $(TGTBIN)/% $(TGTBIN)/libcommon.so | $(TG
 $(TGTDIR)/%/libcommon.so: $(COMMON)/build/libcommon.so | $(TGTDIR)/%
 	ln -s ../../$< $@
 
-$(TGTBIN) $(TGTDAT) $(TGTDOC) $(TGTEGS) $(TGTOBJ): | $(TGTDIR)
+$(TGTBIN) $(TGTDAT) $(TGTDOC) $(TGTEGS): | $(TGTDIR)
 	mkdir $@
 
 $(TGTDIR):
@@ -113,7 +112,7 @@ $(TGTDOC)/html: $(SRCDIR) $(INCDIR) Doxyfile | $(TGTDOC)
 .PHONY: build-egs
 build-egs: $(patsubst %,$(TGTEGS)/%_$(SIG),$(EXAMPLES)) $(TGTEGS)/libcommon.so
 
-$(TGTEGS)/%_$(SIG): $(TGTOBJ)/%.c $(TGTOBJ)/matrix.c $(TGTOBJ)/matrix_$(IMPL).c
+$(TGTEGS)/%_$(SIG): $(EGSDIR)/%.c $(SRCDIR)/matrix.c $(SRCDIR)/matrix_$(IMPL).c | $(TGTEGS)
 	$(CC) $(CFLAGS) $(CLIBS) $(CINCS) $^ -o $@
 
 .PHONY: check
