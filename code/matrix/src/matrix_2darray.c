@@ -67,10 +67,8 @@ double matrix_get(matrix* m, int row, int col) {
 }
 
 matrix *matrix_mmul(matrix* m1, matrix* m2) {
-	if (matrix_num_cols(m1) != matrix_num_rows(m2)) {
-		FATAL(1, "`m1` has %d columns but `m2` has %d rows",
-			matrix_num_cols(m1), matrix_num_rows(m2));
-	}
+	ASSERT(matrix_num_cols(m1) == matrix_num_rows(m2));
+
 	matrix* m = matrix_new(matrix_num_rows(m1), matrix_num_cols(m2));
 
 	int row, col, i;
