@@ -113,7 +113,7 @@ $(TGTDOC)/html: $(SRCDIR) $(INCDIR) Doxyfile | $(TGTDOC)
 build-egs: $(patsubst %,$(TGTEGS)/%_$(SIG),$(EXAMPLES)) $(TGTEGS)/libcommon.so
 
 $(TGTEGS)/%_$(SIG): $(EGSDIR)/%.c $(SRCDIR)/matrix.c $(SRCDIR)/matrix_$(IMPL).c | $(TGTEGS)
-	$(CC) $(CFLAGS) $(CLIBS) $(CINCS) $^ -o $@
+	$(CC) $(CFLAGS) $(CLIBS) $(CINCS) -D ENABLE_ASSERTIONS $^ -o $@
 
 .PHONY: check
 check:

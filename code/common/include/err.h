@@ -24,12 +24,19 @@
 	exit(code)
 
 /**
- * \brief Exit if `cond` isn't `true`.
+ * \brief Exit if assertions are enabled and `cond` isn't `true`.
+ *
+ * Enable assertions by predefining `ENABLE_ASSERTIONS` (for example, by passing
+ * `-D ENABLE_ASSERTIONS` to `gcc`).
  *
  * Example usage:
  * \code ASSERT(1 == 1); \endcode
  */
-#define ASSERT(cond) \
-	if (!cond) { FATAL(1, "assertion failed: %s", #cond); }
+#ifdef ENABLE_ASSERTIONS
+	#define ASSERT(cond) \
+		if (!(cond)) { FATAL(1, "assertion failed: %s\n", #cond); }
+#else
+	#define ASSERT(cond)
+#endif
 
 #endif
